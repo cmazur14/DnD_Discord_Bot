@@ -1,5 +1,6 @@
 package com.thegingerbeardd.dndbot.character;
 
+import com.thegingerbeardd.dndbot.character.sheet.CharacterAbilityScores;
 import com.thegingerbeardd.dndbot.character.sheet.CharacterClass;
 
 import java.util.List;
@@ -7,6 +8,11 @@ import java.util.List;
 public class CharacterProperties {
     private Character owner;
     public int overallLevel;
+    public CharacterAbilityScores abilityScores;
+
+    public CharacterAbilityScores getAbilityScores() {
+        return abilityScores;
+    }
 
     public int getProficiencyMod() {
         forceUpdateOverallLevel();

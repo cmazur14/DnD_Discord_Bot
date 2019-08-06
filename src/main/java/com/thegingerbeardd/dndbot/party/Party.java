@@ -1,23 +1,38 @@
 package com.thegingerbeardd.dndbot.party;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import com.thegingerbeardd.dndbot.character.Character;
 
 public class Party {
 
-    private List<Character> charactersInParty;
+    private Map<String, Character> charactersInParty;
 
     public Party() {
-        charactersInParty = new ArrayList<Character>();
+        charactersInParty = new HashMap<String, Character>();
     }
 
     public void addPartyMember(Character ch) {
-        charactersInParty.add(ch);
+        charactersInParty.put(ch.getName(), ch);
     }
 
     public void addNewPartyMemberWithName(String name) {
-        charactersInParty.add(new Character(name));
+        charactersInParty.put(name, new Character(name));
+    }
+
+    public Character getPartyMemberWithName(String name) {
+        return charactersInParty.get(name);
+    }
+
+    public List<Character> getAllCharactersInParty() {
+        List<Character> toReturn = new ArrayList<Character>();
+        for (String s : charactersInParty.keySet()) {
+            toReturn.add(charactersInParty.get(s));
+        }
+        return toReturn;
     }
 
 }

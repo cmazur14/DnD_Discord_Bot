@@ -1,5 +1,6 @@
 package com.thegingerbeardd.dndbot;
 
+import com.thegingerbeardd.dndbot.character.sheet.CharacterClass;
 import com.thegingerbeardd.dndbot.discord.DnDBotListenerAdapter;
 import com.thegingerbeardd.dndbot.party.Party;
 import net.dv8tion.jda.api.AccountType;
@@ -28,7 +29,16 @@ public class DnDBotDriver {
     private static Party buildDefaultParty() {
         Party party = new Party();
         Character mainCharacter = new Character("BoatyMcBoatface");
-        mainCharacter.getProperties();
+        mainCharacter.getProperties().setOwner(mainCharacter);
+        mainCharacter.getCharacterClasses().add(new CharacterClass());
+        mainCharacter.getProperties().getAbilityScores().setStrength(18);
+        mainCharacter.getProperties().getAbilityScores().setDexterity(16);
+        mainCharacter.getProperties().getAbilityScores().setConstitution(14);
+        mainCharacter.getProperties().getAbilityScores().setIntelligence(12);
+        mainCharacter.getProperties().getAbilityScores().setWisdom(10);
+        mainCharacter.getProperties().getAbilityScores().setCharisma(8);
+        mainCharacter.getProperties().isProficientInAthletics = false;
+        party.addPartyMember(mainCharacter);
         return party;
     }
 
