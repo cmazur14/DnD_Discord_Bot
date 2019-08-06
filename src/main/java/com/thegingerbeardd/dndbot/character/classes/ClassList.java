@@ -1,7 +1,7 @@
 package com.thegingerbeardd.dndbot.character.classes;
 
 public enum ClassList {
-    BARBARIAN(Barbarian.getStaticClassName());
+    BARBARIAN("Barbarian");
     //TODO implement the rest of this enum once the rest of the classes are implemented
 
     private String val;

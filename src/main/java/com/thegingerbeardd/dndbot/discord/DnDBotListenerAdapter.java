@@ -5,7 +5,6 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.spi.LoggerFactoryBinder;
 
 import java.util.Arrays;
 
@@ -21,11 +20,24 @@ public class DnDBotListenerAdapter extends ListenerAdapter {
             return;
         }
         String[] inputs = event.getMessage().getContentRaw().split(" ", -1);
-        event.getMessage().getChannel().sendMessage("Received message with tokens: " + Arrays.toString(inputs)).queue();
         LOGGER.debug("Received message with tokens: " + Arrays.toString(inputs));
+        switch (inputs[1].toLowerCase()) {
+            case "whois":
+            case "who":
+                sendChat(event,"The current party is made up of:" + party.toString());
+                break;
+            default:
+                sendChat(event,"I don't understand that message!!\n" + inputs[1] + " is not a command I recognize.");
+        }
+    }
+
+    private void sendChat(MessageReceivedEvent event, String msg) {
+        event.getMessage().getChannel().sendMessage(msg).queue();
     }
 
     public void addParty(Party party) {
         this.party = party;
     }
+
+
 }

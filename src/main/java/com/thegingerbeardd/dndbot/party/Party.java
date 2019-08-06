@@ -35,4 +35,14 @@ public class Party {
         return toReturn;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder toReturn = new StringBuilder().append("\n");
+        for (String ch : charactersInParty.keySet()) {
+            toReturn.append(charactersInParty.get(ch))
+                .append("\n");
+        }
+        return toReturn.toString();
+    }
+
 }
