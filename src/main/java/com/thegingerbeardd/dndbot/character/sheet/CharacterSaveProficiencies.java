@@ -2,6 +2,7 @@ package com.thegingerbeardd.dndbot.character.sheet;
 
 import com.thegingerbeardd.dndbot.character.utils.fifthedition.AbilityTypes;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CharacterSaveProficiencies {
@@ -9,12 +10,19 @@ public class CharacterSaveProficiencies {
     private Map<String, Boolean> proficiencies;
 
     public CharacterSaveProficiencies() {
+        proficiencies = new HashMap<String, Boolean>();
         for (AbilityTypes type : AbilityTypes.values()) {
             proficiencies.put(type.getType(), false);
         }
     }
 
     public CharacterSaveProficiencies(CharacterClass charClass) {
+        proficiencies = new HashMap<String, Boolean>();
+        for (String s : charClass.getSaveProficiencyList())
+            proficiencies.put(s, true);
+    }
+
+    public void updateProficienciesBasedOnNewClass(CharacterClass charClass) {
         for (String s : charClass.getSaveProficiencyList())
             proficiencies.put(s, true);
     }

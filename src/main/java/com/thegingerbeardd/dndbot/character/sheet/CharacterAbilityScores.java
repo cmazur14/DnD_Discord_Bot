@@ -1,8 +1,5 @@
 package com.thegingerbeardd.dndbot.character.sheet;
 
-import com.thegingerbeardd.dndbot.character.CharacterProperties;
-import com.thegingerbeardd.dndbot.character.utils.fifthedition.AbilityTypes;
-
 import java.util.HashMap;
 import java.util.Map;
 

@@ -4,7 +4,8 @@ import java.util.List;
 
 public interface CharacterClass {
 
-    public boolean getSaveProficient(String saveType);
-    public List<String> getSaveProficiencyList();
+    String getClassName();
+    int getCurrentLevel();
+    List<String> getSaveProficiencyList();
 
 }
