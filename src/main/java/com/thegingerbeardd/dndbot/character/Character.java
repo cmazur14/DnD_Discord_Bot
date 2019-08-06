@@ -1,26 +1,24 @@
 package com.thegingerbeardd.dndbot.character;
 
+import com.thegingerbeardd.dndbot.character.classes.ClassInitializer;
+import com.thegingerbeardd.dndbot.character.classes.ClassList;
 import com.thegingerbeardd.dndbot.character.sheet.CharacterClass;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Character {
 
-    private CharacterProperties properties;
     private String name;
-    private List<CharacterClass> characterClasses;
+    private List<String> characterClassList;
+    private Map<String, CharacterClass> charClasses;
 
     public Character(String name) {
         this.name = name;
-        characterClasses = new ArrayList<CharacterClass>();
-        properties = new CharacterProperties();
-        properties.setOwner(this);
+        characterClassList = new ArrayList<String>();
     }
 
-    public CharacterProperties getProperties() {
-        return properties;
-    }
     //TODO move entire directory to path with no spaces in it
 
     public String getName() {
@@ -31,7 +29,14 @@ public class Character {
         this.name = name;
     }
 
-    public List<CharacterClass> getCharacterClasses() {
-        return characterClasses;
+    public void addClassLevel(ClassList charClass) {
+        if (!characterClassList.contains(charClass.getClassName()))
+            characterClassList.add(charClass.getClassName());
+        if (charClasses.get(charClass.getClassName()) == null)
+            charClasses.put(charClass.getClassName(), ClassInitializer.makeNewClass(charClass));
+        CharacterClass classToIncreaseLevel = charClasses.get(charClass.getClassName());
+        classToIncreaseLevel.setCurrentLevel(classToIncreaseLevel.getCurrentLevel() + 1);
+
     }
+
 }

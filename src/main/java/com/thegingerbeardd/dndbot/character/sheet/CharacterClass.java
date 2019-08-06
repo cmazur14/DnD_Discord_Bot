@@ -6,6 +6,7 @@ public interface CharacterClass {
 
     String getClassName();
     int getCurrentLevel();
+    void setCurrentLevel(int val);
     List<String> getSaveProficiencyList();
 
 }

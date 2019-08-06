@@ -17,8 +17,12 @@ public class Barbarian implements CharacterClass {
         return CLASS_NAME;
     }
 
+    public static String getStaticClassName() {
+        return CLASS_NAME;
+    }
+
     public int getCurrentLevel() {
-        return currentLevel <= 0 || currentLevel > 20 ? 1 : currentLevel;
+        return currentLevel <= 0 || currentLevel > 20 ? 0 : currentLevel;
     }
 
     public List<String> getSaveProficiencyList() {
@@ -26,5 +30,9 @@ public class Barbarian implements CharacterClass {
         proficiencies.add(PROFICIENCY_1);
         proficiencies.add(PROFICIENCY_2);
         return proficiencies;
+    }
+
+    public void setCurrentLevel(int val) {
+        currentLevel = val;
     }
 }
