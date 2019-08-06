@@ -9,6 +9,15 @@ public class CharacterAbilityScores {
     private int intelligence;
     private int wisdom;
     private int charisma;
+    private CharacterProperties prop;
+
+    public CharacterAbilityScores() {
+        prop = null;
+    }
+
+    public void setCharacterProperties(CharacterProperties properties) {
+        prop = properties;
+    }
 
     public int getStrength() {
         return strength;
@@ -82,7 +91,7 @@ public class CharacterAbilityScores {
         return (strength - 10) / 2;
     }
 
-    public int getChaSaveModifier(CharacterProperties prop) {
+    public int getChaSaveModifier() {
         int toReturn = getChaModifier();
         for (CharacterClass charClass : prop.getOwner().getCharacterClasses()) {
             if (charClass.ChaSaveProficient) {
@@ -93,7 +102,7 @@ public class CharacterAbilityScores {
         return toReturn;
     }
 
-    public int getWisSaveModifier(CharacterProperties prop) {
+    public int getWisSaveModifier() {
         int toReturn = getWisModifier();
         for (CharacterClass charClass : prop.getOwner().getCharacterClasses()) {
             if (charClass.WisSaveProficient) {
@@ -104,7 +113,7 @@ public class CharacterAbilityScores {
         return toReturn;
     }
 
-    public int getIntSaveModifier(CharacterProperties prop) {
+    public int getIntSaveModifier() {
         int toReturn = getIntModifier();
         for (CharacterClass charClass : prop.getOwner().getCharacterClasses()) {
             if (charClass.IntSaveProficient) {
@@ -115,7 +124,7 @@ public class CharacterAbilityScores {
         return toReturn;
     }
 
-    public int getConSaveModifier(CharacterProperties prop) {
+    public int getConSaveModifier() {
         int toReturn = getConModifier();
         for (CharacterClass charClass : prop.getOwner().getCharacterClasses()) {
             if (charClass.ConSaveProficient) {
@@ -126,7 +135,7 @@ public class CharacterAbilityScores {
         return toReturn;
     }
 
-    public int getDexSaveModifier(CharacterProperties prop) {
+    public int getDexSaveModifier() {
         int toReturn = getDexModifier();
         for (CharacterClass charClass : prop.getOwner().getCharacterClasses()) {
             if (charClass.DexSaveProficient) {
@@ -137,7 +146,7 @@ public class CharacterAbilityScores {
         return toReturn;
     }
 
-    public int getStrSaveModifier(CharacterProperties prop) {
+    public int getStrSaveModifier() {
         int toReturn = getStrModifier();
         for (CharacterClass charClass : prop.getOwner().getCharacterClasses()) {
             if (charClass.StrSaveProficient) {

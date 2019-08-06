@@ -9,4 +9,14 @@ public class CharacterClass {
     public boolean StrSaveProficient;
 
     public int currentCharacterLevel;
+
+    public CharacterClass() {
+        currentCharacterLevel = 1;
+        ChaSaveProficient = false;
+        WisSaveProficient = false;
+        IntSaveProficient = false;
+        ConSaveProficient = false;
+        DexSaveProficient = false;
+        StrSaveProficient = false;
+    }
 }

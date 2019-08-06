@@ -10,6 +10,12 @@ public class CharacterProperties {
     public int overallLevel;
     public CharacterAbilityScores abilityScores;
 
+    public CharacterProperties() {
+        abilityScores = new CharacterAbilityScores();
+        abilityScores.setCharacterProperties(this);
+        overallLevel = 1;
+    }
+
     public CharacterAbilityScores getAbilityScores() {
         return abilityScores;
     }
