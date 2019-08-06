@@ -24,6 +24,7 @@ public class RollModifierCalculator {
         if (saveProficiencies.isProficientIn(savingThrowType))
             return abilityScores.getAbilityModifier(savingThrowType) + ((overallLevel - 1) / 4) + 2;
         return abilityScores.getAbilityModifier(savingThrowType);
+        //TODO fix this entire class to specify that this calculates 5th edition rules only
     }
 
     public int getSkillRollModifier(String skillType) {
