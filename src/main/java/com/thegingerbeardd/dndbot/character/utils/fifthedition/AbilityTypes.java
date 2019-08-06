@@ -1,12 +1,12 @@
 package com.thegingerbeardd.dndbot.character.utils.fifthedition;
 
 public enum AbilityTypes {
-    STRENGTH("str"),
-    DEXTERITY("dex"),
-    CONSTITUTION("con"),
-    INTELLIGENCE("int"),
-    WISDOM("wis"),
-    CHARISMA("cha");
+    STR("strength"),
+    DEX("dexterity"),
+    CON("constitution"),
+    INT("intelligence"),
+    WIS("wisdom"),
+    CHA("charisma");
 
     private String val;
 

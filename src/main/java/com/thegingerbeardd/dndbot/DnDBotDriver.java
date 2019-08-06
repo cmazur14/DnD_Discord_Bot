@@ -1,11 +1,11 @@
 package com.thegingerbeardd.dndbot;
 
-import com.thegingerbeardd.dndbot.character.classes.Barbarian;
 import com.thegingerbeardd.dndbot.character.classes.ClassList;
-import com.thegingerbeardd.dndbot.character.sheet.CharacterClass;
 import com.thegingerbeardd.dndbot.dice.Die;
-import com.thegingerbeardd.dndbot.discord.DnDBotListenerAdapter;
+import com.thegingerbeardd.dndbot.adapter.DnDBotListenerAdapter;
 import com.thegingerbeardd.dndbot.party.Party;
+import com.thegingerbeardd.dndbot.processor.ChatProcessor;
+import com.thegingerbeardd.dndbot.processor.impl.FifthEditionChatProcessor;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import com.thegingerbeardd.dndbot.character.Character;
@@ -20,21 +20,30 @@ public class DnDBotDriver {
     private static final Logger LOGGER = LogManager.getLogger(DnDBotDriver.class);
 
     public static void main(String[] args) throws LoginException {
+        /* Utility Debugging Method*/
+        ChatProcessor processor = new FifthEditionChatProcessor();
+        processor.setParty(buildDefaultParty());
+        doTestThings(processor);
+        startCommandLineListener(processor);
+        startDiscordListenerAdapter(processor);
+
+    }
+
+    private static void startCommandLineListener(ChatProcessor processor) {
+
+    }
+
+    private static void startDiscordListenerAdapter(ChatProcessor processor) throws LoginException {
         JDABuilder builder = new JDABuilder(AccountType.BOT);
         builder.setToken("NjA3OTA1ODM5MzI3NjA4ODUz.XUgbAA.1wI_noWOYjI07QmwjNCHxF9ZIso");
-
-        /* Utility Debugging Method*/
-        doTestThings();
-
-        LOGGER.debug("Beginning build");
+        LOGGER.debug("Beginning Discord build");
         DnDBotListenerAdapter listener = new DnDBotListenerAdapter();
-        listener.addParty(buildDefaultParty());
         builder.addEventListeners(listener);
         builder.build();
         LOGGER.debug("Build complete");
     }
 
-    private static void doTestThings() {
+    private static void doTestThings(ChatProcessor processor) {
         Party party = buildDefaultParty();
 
     }

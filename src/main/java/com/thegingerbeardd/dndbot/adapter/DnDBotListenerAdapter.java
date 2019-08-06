@@ -1,17 +1,19 @@
-package com.thegingerbeardd.dndbot.discord;
+package com.thegingerbeardd.dndbot.adapter;
 
-import com.thegingerbeardd.dndbot.party.Party;
+import com.thegingerbeardd.dndbot.processor.impl.FifthEditionChatProcessor;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-
 public class DnDBotListenerAdapter extends ListenerAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DnDBotListenerAdapter.class);
-    private Party party;
+    private FifthEditionChatProcessor messageProcessor;
+
+    public void setMessageProcessor(FifthEditionChatProcessor processor) {
+        messageProcessor = processor;
+    }
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
@@ -19,25 +21,11 @@ public class DnDBotListenerAdapter extends ListenerAdapter {
             LOGGER.debug("Ignoring message: " + event.getMessage().getContentRaw());
             return;
         }
-        String[] inputs = event.getMessage().getContentRaw().split(" ", -1);
-        LOGGER.debug("Received message with tokens: " + Arrays.toString(inputs));
-        switch (inputs[1].toLowerCase()) {
-            case "whois":
-            case "who":
-                sendChat(event,"The current party is made up of:" + party.toString());
-                break;
-            default:
-                sendChat(event,"I don't understand that message!!\n" + inputs[1] + " is not a command I recognize.");
-        }
+        sendChat(event, messageProcessor.processInputMessage(event.getMessage().getContentRaw()));
     }
 
     private void sendChat(MessageReceivedEvent event, String msg) {
         event.getMessage().getChannel().sendMessage(msg).queue();
     }
-
-    public void addParty(Party party) {
-        this.party = party;
-    }
-
 
 }

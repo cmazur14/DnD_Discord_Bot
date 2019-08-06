@@ -3,12 +3,20 @@ package com.thegingerbeardd.dndbot.character;
 import com.thegingerbeardd.dndbot.character.sheet.CharacterAbilityScores;
 import com.thegingerbeardd.dndbot.character.sheet.CharacterSaveProficiencies;
 import com.thegingerbeardd.dndbot.character.sheet.CharacterSkillProficiencies;
+import com.thegingerbeardd.dndbot.character.utils.fifthedition.AbilityTypes;
 
 public class RollModifierCalculator {
 
     private CharacterAbilityScores abilityScores;
     private CharacterSkillProficiencies skillProficiencies;
     private CharacterSaveProficiencies saveProficiencies;
+    private static RollModifierCalculator instance;
+
+    public static RollModifierCalculator getInstance() {
+        if (instance == null)
+            instance = new RollModifierCalculator();
+        return instance;
+    }
 
     /**
      * If the character that owns this calculator is proficient in the Saving Throw specified by savingThrowType,
@@ -20,7 +28,7 @@ public class RollModifierCalculator {
      * @param overallLevel SHOULD be the sum of all class levels a character has, must be calculated by caller
      * @return the value of the modifier to be added to a d20 roll
      */
-    public int getSavingThrowModifier(String savingThrowType, int overallLevel) {
+    public int getSavingThrowModifier(AbilityTypes savingThrowType, int overallLevel) {
         if (saveProficiencies.isProficientIn(savingThrowType))
             return abilityScores.getAbilityModifier(savingThrowType) + ((overallLevel - 1) / 4) + 2;
         return abilityScores.getAbilityModifier(savingThrowType);

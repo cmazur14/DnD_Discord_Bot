@@ -7,35 +7,35 @@ import java.util.Map;
 
 public class CharacterSaveProficiencies {
 
-    private Map<String, Boolean> proficiencies;
+    private Map<AbilityTypes, Boolean> proficiencies;
 
     public CharacterSaveProficiencies() {
-        proficiencies = new HashMap<String, Boolean>();
+        proficiencies = new HashMap<>();
         for (AbilityTypes type : AbilityTypes.values()) {
-            proficiencies.put(type.getType(), false);
+            proficiencies.put(type, false);
         }
     }
 
     public CharacterSaveProficiencies(CharacterClass charClass) {
-        proficiencies = new HashMap<String, Boolean>();
-        for (String s : charClass.getSaveProficiencyList())
+        proficiencies = new HashMap<>();
+        for (AbilityTypes s : charClass.getSaveProficiencyList())
             proficiencies.put(s, true);
     }
 
     public void updateProficienciesBasedOnNewClass(CharacterClass charClass) {
-        for (String s : charClass.getSaveProficiencyList())
+        for (AbilityTypes s : charClass.getSaveProficiencyList())
             proficiencies.put(s, true);
     }
 
-    public void makeProficientIn(String saveType) {
+    public void makeProficientIn(AbilityTypes saveType) {
         proficiencies.put(saveType, true);
     }
 
-    public void makeNotProficientIn(String saveType) {
+    public void makeNotProficientIn(AbilityTypes saveType) {
         proficiencies.put(saveType, false);
     }
 
-    public boolean isProficientIn(String saveType) {
+    public boolean isProficientIn(AbilityTypes saveType) {
         return proficiencies.get(saveType);
     }
 

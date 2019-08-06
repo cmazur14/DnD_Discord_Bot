@@ -28,7 +28,7 @@ public class Party {
     }
 
     public List<Character> getAllCharactersInParty() {
-        List<Character> toReturn = new ArrayList<Character>();
+        List<Character> toReturn = new ArrayList<>();
         for (String s : charactersInParty.keySet()) {
             toReturn.add(charactersInParty.get(s));
         }
@@ -45,4 +45,11 @@ public class Party {
         return toReturn.toString();
     }
 
+    public boolean containsPartyMember(String input) {
+        for (String ch : charactersInParty.keySet()) {
+            if (input.equals(ch))
+                return true;
+        }
+        return false;
+    }
 }

@@ -1,29 +1,31 @@
 package com.thegingerbeardd.dndbot.character.sheet;
 
+import com.thegingerbeardd.dndbot.character.utils.fifthedition.AbilityTypes;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class CharacterAbilityScores {
 
-    private Map<String, Integer> abilityScores;
+    private Map<AbilityTypes, Integer> abilityScores;
 
     public CharacterAbilityScores() {
-        abilityScores = new HashMap<String, Integer>();
+        abilityScores = new HashMap<>();
     }
 
-    public void setAbilityScore(String abilityType, int val) {
+    public void setAbilityScore(AbilityTypes abilityType, int val) {
         abilityScores.put(abilityType, val);
     }
 
-    public void fillAbilityScores(Map<String, Integer> scores) {
+    public void fillAbilityScores(Map<AbilityTypes, Integer> scores) {
         abilityScores = scores;
     }
 
-    public int getAbilityScore(String abilityType) {
+    public int getAbilityScore(AbilityTypes abilityType) {
         return abilityScores.get(abilityType);
     }
 
-    public int getAbilityModifier(String abilityType) {
+    public int getAbilityModifier(AbilityTypes abilityType) {
         return (abilityScores.get(abilityType) - 10) / 2;
     }
 }
