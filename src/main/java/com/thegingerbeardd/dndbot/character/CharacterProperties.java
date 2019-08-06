@@ -17,6 +17,10 @@ public class CharacterProperties {
         this.owner = owner;
     }
 
+    public Character getOwner() {
+        return owner;
+    }
+
     private void forceUpdateOverallLevel() {
         overallLevel = 0;
         for (CharacterClass charClass : owner.getCharacterClasses())

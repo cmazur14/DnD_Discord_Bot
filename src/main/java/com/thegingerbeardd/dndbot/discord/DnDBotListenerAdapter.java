@@ -5,6 +5,9 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.spi.LoggerFactoryBinder;
+
+import java.util.Arrays;
 
 public class DnDBotListenerAdapter extends ListenerAdapter {
 
@@ -13,10 +16,13 @@ public class DnDBotListenerAdapter extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        LOGGER.debug("Received message from: " +
-                event.getAuthor().getName() +
-                "that says:\n " +
-                event.getMessage().getContentDisplay());
+        if (event.getAuthor().isBot() || !event.getMessage().getContentRaw().startsWith("dnd")) {
+            LOGGER.debug("Ignoring message: " + event.getMessage().getContentRaw());
+            return;
+        }
+        String[] inputs = event.getMessage().getContentRaw().split(" ", -1);
+        event.getMessage().getChannel().sendMessage("Received message with tokens: " + Arrays.toString(inputs)).queue();
+        LOGGER.debug("Received message with tokens: " + Arrays.toString(inputs));
     }
 
     public void addParty(Party party) {
