@@ -74,9 +74,13 @@ public class Character {
 
     public String getClassListAsString() {
         StringBuilder toReturn = new StringBuilder();
+        if (charClasses.keySet().isEmpty())
+            return "";
         for (String s : charClasses.keySet())
-            toReturn.append(charClasses.get(s)).append(", ");
-        return toReturn.toString();
+            toReturn.append("level ")
+                    .append(charClasses.get(s))
+                    .append(", ");
+        return toReturn.toString().substring(0, toReturn.toString().length()-2);
     }
 
     public Set<String> getClassList() {
@@ -85,11 +89,14 @@ public class Character {
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append(StringUtils.capitalize(name.toLowerCase()))
-                .append(", a level ")
-                .append(getClassListAsString())
-                .toString();
+        if (getClassListAsString().isEmpty())
+            return StringUtils.capitalize(name.toLowerCase()) + ", a wimpy little shit who can't do anything and is still level 0";
+        else
+            return new StringBuilder()
+                    .append(StringUtils.capitalize(name.toLowerCase()))
+                    .append(", a ")
+                    .append(getClassListAsString())
+                    .toString();
     }
 
     public boolean isProficientIn(AbilityTypes savingThrowType) {

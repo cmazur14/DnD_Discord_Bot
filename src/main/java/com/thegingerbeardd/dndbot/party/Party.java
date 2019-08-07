@@ -37,12 +37,13 @@ public class Party {
 
     @Override
     public String toString() {
-        StringBuilder toReturn = new StringBuilder().append("\n");
+        StringBuilder toReturn = new StringBuilder().append("The party is made up of: \n");
         for (String ch : charactersInParty.keySet()) {
-            toReturn.append(charactersInParty.get(ch))
-                .append("\n");
+            toReturn.append("\t-")
+                    .append(charactersInParty.get(ch))
+                    .append("\n");
         }
-        return toReturn.toString();
+        return toReturn.toString().substring(0, toReturn.toString().length() - 1);
     }
 
     public boolean containsPartyMember(String input) {
