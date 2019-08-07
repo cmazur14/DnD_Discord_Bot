@@ -27,6 +27,8 @@ public class FifthEditionChatProcessor implements ChatProcessor {
             AbilityTypes type = AbilityTypes.valueOf(inputs[3].toUpperCase().substring(0, 3));
             return SavingThrowResponseGenerator.generateSavingThrowResult(party.getPartyMemberWithName(inputs[2]), type);
         }
+        //TODO deal with party name capitalizations
+        //TODO Add roll value and modifier to output, potentially coloring nat1's and nat20's
     }
 
     @Override

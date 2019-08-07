@@ -10,7 +10,7 @@ public class SavingThrowResponseGenerator {
     private static final Die d20 = new Die(20);
 
     public static String generateSavingThrowResult(Character ch, AbilityTypes ability) {
-        int mod = RollModifierCalculator.getInstance().getSavingThrowModifier(ability, ch.getCurrentCharacterLevel());
+        int mod = RollModifierCalculator.getInstance().getSavingThrowModifier(ability, ch);
         return new StringBuilder()
                 .append(ch.getName())
                 .append(" rolls a **")

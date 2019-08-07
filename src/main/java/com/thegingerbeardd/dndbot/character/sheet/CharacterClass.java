@@ -34,8 +34,8 @@ public class CharacterClass {
     @Override
     public String toString() {
         return new StringBuilder()
-                .append(className).append(" ")
-                .append(currentLevel).toString();
+                .append(currentLevel).append(" ")
+                .append(className).toString();
     }
 
 }

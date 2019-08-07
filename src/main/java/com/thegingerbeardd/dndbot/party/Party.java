@@ -20,11 +20,11 @@ public class Party {
     }
 
     public void addNewPartyMemberWithName(String name) {
-        charactersInParty.put(name, new Character(name));
+        charactersInParty.put(name.toUpperCase(), new Character(name.toUpperCase()));
     }
 
     public Character getPartyMemberWithName(String name) {
-        return charactersInParty.get(name);
+        return charactersInParty.get(name.toUpperCase());
     }
 
     public List<Character> getAllCharactersInParty() {
@@ -47,7 +47,7 @@ public class Party {
 
     public boolean containsPartyMember(String input) {
         for (String ch : charactersInParty.keySet()) {
-            if (input.equals(ch))
+            if (input.equals(ch.toUpperCase()))
                 return true;
         }
         return false;

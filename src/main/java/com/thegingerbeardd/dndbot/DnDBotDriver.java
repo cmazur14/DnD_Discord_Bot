@@ -14,23 +14,39 @@ import org.apache.log4j.Logger;
 
 import javax.security.auth.login.LoginException;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class DnDBotDriver {
 
     private static final Logger LOGGER = LogManager.getLogger(DnDBotDriver.class);
+    private boolean startDiscord;
 
     public static void main(String[] args) throws LoginException {
         /* Utility Debugging Method*/
         ChatProcessor processor = new FifthEditionChatProcessor();
         processor.setParty(buildDefaultParty());
         doTestThings(processor);
-        startCommandLineListener(processor);
-        startDiscordListenerAdapter(processor);
+        if (startDiscordAfterCommandLineListener(processor))
+            startDiscordListenerAdapter(processor);
 
     }
 
-    private static void startCommandLineListener(ChatProcessor processor) {
-
+    private static boolean startDiscordAfterCommandLineListener(ChatProcessor processor) {
+        final Scanner kb = new Scanner(System.in);
+        System.out.println("Would you like to start the discord server? (Y/N) ");
+        String input = kb.next();
+        if (input.equalsIgnoreCase("Y"))
+            return true;
+        else
+            new Thread(() -> {
+                String nextInput = kb.nextLine();
+                while (!nextInput.equals("quit")) {
+                    if (nextInput.startsWith("dnd"));
+                        System.out.println(processor.processInputMessage(nextInput));
+                    nextInput = kb.nextLine();
+                }
+            }).start();
+        return false;
     }
 
     private static void startDiscordListenerAdapter(ChatProcessor processor) throws LoginException {
@@ -66,9 +82,10 @@ public class DnDBotDriver {
 
     private static Party buildDefaultParty() {
         Party party = new Party();
-        Character mainCharacter = new Character("BoatyMcBoatface");
-        mainCharacter.addClassLevel(ClassList.BARBARIAN);
-        party.addPartyMember(mainCharacter);
+        party.addPartyMember(Character.generateRandomCharacterWithName("Bob"));
+        party.addPartyMember(Character.generateRandomCharacterWithName("Phil"));
+        party.addPartyMember(Character.generateRandomCharacterWithName("Joe"));
+        party.getPartyMemberWithName("Bob").addClassLevel(ClassList.BARBARIAN);
         return party;
     }
 
