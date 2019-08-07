@@ -17,7 +17,7 @@ public class DnDBotListenerAdapter extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getAuthor().isBot() || !event.getMessage().getContentRaw().startsWith("dnd")) {
+        if (event.getAuthor().isBot() || !event.getMessage().getContentRaw().startsWith("#ttbot")) {
             LOGGER.debug("Ignoring message: " + event.getMessage().getContentRaw());
             return;
         }
