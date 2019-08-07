@@ -2,6 +2,7 @@ package com.thegingerbeardd.dndbot.processor.impl;
 
 import com.thegingerbeardd.dndbot.character.utils.fifthedition.AbilityTypes;
 import com.thegingerbeardd.dndbot.generator.SavingThrowResponseGenerator;
+import com.thegingerbeardd.dndbot.parsing.FifthEdtionCommandParser;
 import com.thegingerbeardd.dndbot.party.Party;
 import com.thegingerbeardd.dndbot.processor.ChatProcessor;
 import org.apache.log4j.LogManager;
@@ -18,36 +19,26 @@ public class FifthEditionChatProcessor implements ChatProcessor {
         this.party = party;
     }
 
-    public String dealWithSavingThrowCommand(String[] inputs) {
-        if (inputs.length < 3)
-            throw new ArrayIndexOutOfBoundsException();
-        else if (inputs[2] == null || !party.containsPartyMember(inputs[2]))
-            return "I'm sorry, but that party member doesn't exist!";
-        else {
-            AbilityTypes type = AbilityTypes.valueOf(inputs[3].toUpperCase().substring(0, 3));
-            return SavingThrowResponseGenerator.generateSavingThrowResult(party.getPartyMemberWithName(inputs[2]), type);
-        }
-        //TODO deal with party name capitalizations
-        //TODO Add roll value and modifier to output, potentially coloring nat1's and nat20's
-    }
-
     @Override
     public String processInputMessage(String msg) {
         String[] inputs = msg.split(" ", -1);
         LOGGER.debug("Received message with tokens: " + Arrays.toString(inputs));
+        String response;
         try {
             switch (inputs[1].toLowerCase()) {
                 case "whois":
                 case "who":
-                    return "The current party is made up of:" + party.toString();
-                case "save":
-                    return dealWithSavingThrowCommand(inputs);
+                    response = "The current party is made up of:" + party.toString();
+                    break;
                 default:
-                    return "I don't understand that message!!\n" + inputs[1] + " is not a command I recognize.";
+                    response = FifthEdtionCommandParser.parseAndGenerateResponse(inputs);
+                    if (response != null)
+                        response = "I don't understand that message!!\n" + inputs[1] + " is not a command I recognize.";
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            return "That command doesn't seem to have enough arguments!";
+            response = "That command doesn't seem to have enough arguments!";
         }
+        return response;
     }
 
 }
