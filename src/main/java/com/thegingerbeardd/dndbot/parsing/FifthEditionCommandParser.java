@@ -10,11 +10,20 @@ public class FifthEditionCommandParser {
             case "whois":
             case "who":
                 response = party.toString();
+                break;
+            case "add":
+                party.addNewPartyMemberWithName(inputs[2]);
+                response = inputs[2] + " has been added as a character!";
+                break;
             default:
-
+                response = parseRollCommandAndGenerateResponse(inputs, party);
         }
         if (response == null)
             response = "I'm sorry, but I didn't understand that message!";
         return response;
+    }
+
+    public static String parseRollCommandAndGenerateResponse(String [] inputs, Party party) {
+        return null;
     }
 }

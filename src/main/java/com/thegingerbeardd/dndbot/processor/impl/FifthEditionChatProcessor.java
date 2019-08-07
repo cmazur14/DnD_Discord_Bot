@@ -20,8 +20,15 @@ public class FifthEditionChatProcessor implements ChatProcessor {
     @Override
     public String processInputMessage(String msg) {
         String[] inputs = msg.split(" ", -1);
+        if (inputs.length == 0)
+            return null;
         LOGGER.debug("Received message with tokens: " + Arrays.toString(inputs));
-        String response = FifthEditionCommandParser.parseAndGenerateResponse(inputs, party);
+        String response;
+        try {
+            response = FifthEditionCommandParser.parseAndGenerateResponse(inputs, party);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            response = "That command was not recognized!";
+        }
         return response;
     }
 

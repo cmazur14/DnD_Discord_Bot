@@ -40,8 +40,8 @@ public class DnDBotDriver {
         else
             new Thread(() -> {
                 String nextInput = kb.nextLine();
-                while (!nextInput.equals("quit")) {
-                    if (nextInput.startsWith("#ttbot"));
+                while (!nextInput.equalsIgnoreCase("quit")) {
+                    if (nextInput.startsWith("#ttbot") && nextInput != "\n")
                         System.out.println(processor.processInputMessage(nextInput));
                     nextInput = kb.nextLine();
                 }

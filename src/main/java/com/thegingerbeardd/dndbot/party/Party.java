@@ -16,7 +16,7 @@ public class Party {
     }
 
     public void addPartyMember(Character ch) {
-        charactersInParty.put(ch.getName(), ch);
+        charactersInParty.put(ch.getName().toUpperCase(), ch);
     }
 
     public void addNewPartyMemberWithName(String name) {
