@@ -3,3 +3,4 @@
 DnD_Discord_Bot.iml
 
 target
+resources/config.properties
