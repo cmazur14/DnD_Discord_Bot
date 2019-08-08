@@ -37,14 +37,15 @@ public class DnDBotDriver {
 
     private static boolean startDiscordAfterCommandLineListener(ChatProcessor processor) {
         final Scanner kb = new Scanner(System.in);
-        System.out.println("Would you like to start the discord server? (Y/N) ");
-        String input = kb.next();
+        //System.out.println("Would you like to start the discord server? (Y/N) ");
+        //String input = kb.next();
+        String input = "N";
         if (input.equalsIgnoreCase("Y"))
             return true;
         else
             new Thread(() -> {
                 String nextInput = kb.nextLine();
-                while (!nextInput.equalsIgnoreCase("quit")) {
+                while (!nextInput.equalsIgnoreCase("quit") && !nextInput.equalsIgnoreCase("exit")) {
                     if (nextInput.startsWith("#ttbot") && nextInput != "\n")
                         System.out.println(processor.processInputMessage(nextInput));
                     nextInput = kb.nextLine();
