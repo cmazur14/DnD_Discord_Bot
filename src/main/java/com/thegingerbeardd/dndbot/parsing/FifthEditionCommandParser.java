@@ -1,6 +1,7 @@
 package com.thegingerbeardd.dndbot.parsing;
 
 import com.thegingerbeardd.dndbot.party.Party;
+import com.thegingerbeardd.dndbot.utils.TTBotConstants;
 
 public class FifthEditionCommandParser {
 
@@ -12,6 +13,10 @@ public class FifthEditionCommandParser {
                 response = party.toString();
                 break;
             case "add":
+                if (inputs.length < 3) {
+                    response = TTBotConstants.INVALID_ARGUMENTS_MESSAGE;
+                    break;
+                }
                 party.addNewPartyMemberWithName(inputs[2]);
                 response = inputs[2] + " has been added as a character!";
                 break;
@@ -19,7 +24,7 @@ public class FifthEditionCommandParser {
                 response = parseRollCommandAndGenerateResponse(inputs, party);
         }
         if (response == null)
-            response = "I'm sorry, but I didn't understand that message!";
+            response = TTBotConstants.INVALID_COMMAND_MESSAGE;
         return response;
     }
 
