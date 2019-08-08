@@ -6,6 +6,7 @@ import com.thegingerbeardd.dndbot.adapter.DnDBotListenerAdapter;
 import com.thegingerbeardd.dndbot.party.Party;
 import com.thegingerbeardd.dndbot.processor.ChatProcessor;
 import com.thegingerbeardd.dndbot.processor.impl.FifthEditionChatProcessor;
+import com.thegingerbeardd.dndbot.utils.PropertiesFileReader;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import com.thegingerbeardd.dndbot.character.Character;
@@ -13,6 +14,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import javax.security.auth.login.LoginException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -20,11 +22,13 @@ public class DnDBotDriver {
 
     private static final Logger LOGGER = LogManager.getLogger(DnDBotDriver.class);
     private boolean startDiscord;
+    private static PropertiesFileReader reader;
 
     public static void main(String[] args) throws LoginException {
         /* Utility Debugging Method*/
         ChatProcessor processor = new FifthEditionChatProcessor();
         processor.setParty(buildDefaultParty());
+        reader = new PropertiesFileReader();
         doTestThings(processor);
         if (startDiscordAfterCommandLineListener(processor))
             startDiscordListenerAdapter(processor);
@@ -51,8 +55,15 @@ public class DnDBotDriver {
 
     private static void startDiscordListenerAdapter(ChatProcessor processor) throws LoginException {
         JDABuilder builder = new JDABuilder(AccountType.BOT);
-        builder.setToken("NjA3OTA1ODM5MzI3NjA4ODUz.XUgbAA.1wI_noWOYjI07QmwjNCHxF9ZIso");
-        LOGGER.debug("Beginning Discord build");
+        String token = "";
+        try {
+            token = reader.getBotToken(reader.getSystemProperties(reader.getApplicationProperties()));
+        } catch (IOException e) {
+            LOGGER.error("Could not get bot token, bot failed to start:\n" + e.getMessage());
+            System.exit(-1);
+        }
+        builder.setToken(token);
+        LOGGER.debug("Beginning Discord with token: " + token);
         DnDBotListenerAdapter listener = new DnDBotListenerAdapter();
         listener.setMessageProcessor((FifthEditionChatProcessor) processor);
         builder.addEventListeners(listener);
