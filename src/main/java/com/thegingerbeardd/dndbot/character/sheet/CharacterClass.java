@@ -2,10 +2,11 @@ package com.thegingerbeardd.dndbot.character.sheet;
 
 import com.thegingerbeardd.dndbot.character.utils.fifthedition.AbilityTypes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CharacterClass {
+public class CharacterClass implements Serializable {
 
     protected String className;
     protected int currentLevel;

@@ -2,10 +2,11 @@ package com.thegingerbeardd.dndbot.character.sheet;
 
 import com.thegingerbeardd.dndbot.character.utils.fifthedition.AbilityTypes;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CharacterSaveProficiencies {
+public class CharacterSaveProficiencies implements Serializable {
 
     private Map<AbilityTypes, Boolean> proficiencies;
 

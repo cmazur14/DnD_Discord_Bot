@@ -9,24 +9,22 @@ import com.thegingerbeardd.dndbot.character.sheet.CharacterSaveProficiencies;
 import com.thegingerbeardd.dndbot.character.sheet.CharacterSkillProficiencies;
 import com.thegingerbeardd.dndbot.character.utils.fifthedition.AbilityTypes;
 
+import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-public class Character {
+public class Character implements Serializable {
 
     private String name;
     private CharacterAbilityScores abilityScores;
-    private CharacterSkillProficiencies skillProficiencies;
     private CharacterSaveProficiencies saveProficiencies;
     private Map<String, CharacterClass> charClasses;
 
     public Character(String name) {
         this.name = name.toUpperCase();
         abilityScores = new CharacterAbilityScores();
-        skillProficiencies = new CharacterSkillProficiencies();
         saveProficiencies = new CharacterSaveProficiencies();
         charClasses = new HashMap<>();
     }

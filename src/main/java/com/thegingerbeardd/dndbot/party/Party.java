@@ -1,5 +1,6 @@
 package com.thegingerbeardd.dndbot.party;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.Map;
 
 import com.thegingerbeardd.dndbot.character.Character;
 
-public class Party {
+public class Party implements Serializable {
 
     private Map<String, Character> charactersInParty;
 

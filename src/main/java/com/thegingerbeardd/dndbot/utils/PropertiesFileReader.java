@@ -9,20 +9,24 @@ import java.util.Properties;
 
 public class PropertiesFileReader {
 
-    private String result = "";
     private InputStream appPropertiesInputStream;
     private BufferedReader systemPropertiesInputStream;
+    private Properties appProperties;
 
     public Properties getApplicationProperties() throws IOException {
-        Properties prop = new Properties();
-        appPropertiesInputStream = getClass().getClassLoader().getResourceAsStream(TTBotConstants.APPLICATION_PROPERTIES);
+        if (appProperties != null)
+            return appProperties;
+        else {
+            appProperties = new Properties();
+            appPropertiesInputStream = getClass().getClassLoader().getResourceAsStream(TTBotConstants.APPLICATION_PROPERTIES);
 
-        if (appPropertiesInputStream != null)
-            prop.load(appPropertiesInputStream);
-        else
-            throw new FileNotFoundException("property file: '" + TTBotConstants.APPLICATION_PROPERTIES + "' could not be found");
-        appPropertiesInputStream.close();
-        return prop;
+            if (appPropertiesInputStream != null)
+                appProperties.load(appPropertiesInputStream);
+            else
+                throw new FileNotFoundException("property file: '" + TTBotConstants.APPLICATION_PROPERTIES + "' could not be found");
+            appPropertiesInputStream.close();
+            return appProperties;
+        }
     }
 
     public Properties getSystemProperties(Properties p) throws IOException{

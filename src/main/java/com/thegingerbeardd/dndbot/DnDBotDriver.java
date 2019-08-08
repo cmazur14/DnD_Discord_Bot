@@ -6,6 +6,7 @@ import com.thegingerbeardd.dndbot.adapter.DnDBotListenerAdapter;
 import com.thegingerbeardd.dndbot.party.Party;
 import com.thegingerbeardd.dndbot.processor.ChatProcessor;
 import com.thegingerbeardd.dndbot.processor.impl.FifthEditionChatProcessor;
+import com.thegingerbeardd.dndbot.utils.PartyPersistanceDAO;
 import com.thegingerbeardd.dndbot.utils.PropertiesFileReader;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
@@ -30,8 +31,8 @@ public class DnDBotDriver {
         processor.setParty(buildDefaultParty());
         reader = new PropertiesFileReader();
         doTestThings(processor);
-        if (startDiscordAfterCommandLineListener(processor))
-            startDiscordListenerAdapter(processor);
+        /*if (startDiscordAfterCommandLineListener(processor))
+            startDiscordListenerAdapter(processor);*/
 
     }
 
@@ -73,8 +74,16 @@ public class DnDBotDriver {
     }
 
     private static void doTestThings(ChatProcessor processor) {
-        Party party = buildDefaultParty();
-
+        PartyPersistanceDAO dao = new PartyPersistanceDAO();
+        Party party = (Party) dao.readObjectFromTTBotSaveFile("DEFAULT_PARTY");
+        if (party == null)
+            LOGGER.warn("Something went wrong with reading the party from the file");
+        else
+            LOGGER.debug(party);
+        /*if (dao.saveObjectToTTBotSaveFile(party, "DEFAULT_PARTY"))
+            LOGGER.debug("Successfully saved party: " + party.toString() + "\nto a file");
+        else
+            LOGGER.warn("Failed to save party");*/
     }
 
     private void testDiceRandomness() {
