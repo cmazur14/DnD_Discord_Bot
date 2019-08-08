@@ -54,6 +54,7 @@ public class DnDBotDriver {
         builder.setToken("NjA3OTA1ODM5MzI3NjA4ODUz.XUgbAA.1wI_noWOYjI07QmwjNCHxF9ZIso");
         LOGGER.debug("Beginning Discord build");
         DnDBotListenerAdapter listener = new DnDBotListenerAdapter();
+        listener.setMessageProcessor((FifthEditionChatProcessor) processor);
         builder.addEventListeners(listener);
         builder.build();
         LOGGER.debug("Build complete");

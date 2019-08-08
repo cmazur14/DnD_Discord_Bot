@@ -21,6 +21,10 @@ public class DnDBotListenerAdapter extends ListenerAdapter {
             LOGGER.debug("Ignoring message: " + event.getMessage().getContentRaw());
             return;
         }
+        if (event.getMember().getEffectiveName() != null)
+            LOGGER.debug("Processing message from: " + event.getMember().getEffectiveName() + event.getMessage().getContentRaw());
+        else
+            LOGGER.warn("Processing message from private channel: " + event.getMessage().getContentRaw());
         sendChat(event, messageProcessor.processInputMessage(event.getMessage().getContentRaw()));
     }
 
