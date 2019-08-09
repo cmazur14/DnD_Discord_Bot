@@ -21,6 +21,9 @@ public class DnDBotListenerAdapter extends ListenerAdapter {
             LOGGER.debug("Ignoring message: " + event.getMessage().getContentRaw());
             return;
         }
+        //TODO implement filesaving/loading based on event.getGuild().getName(); because a guild is the
+        //TODO serverside name for a channel, potentially adding on an .getGuild.getOwner_ID just in case any
+        //TODO servers are named the same way
         if (event.getMember().getEffectiveName() != null)
             LOGGER.debug("Processing message from: " + event.getMember().getEffectiveName() + event.getMessage().getContentRaw());
         else

@@ -22,7 +22,6 @@ import java.util.Scanner;
 public class DnDBotDriver {
 
     private static final Logger LOGGER = LogManager.getLogger(DnDBotDriver.class);
-    private boolean startDiscord;
     private static PropertiesFileReader reader;
 
     public static void main(String[] args) throws LoginException {
@@ -31,8 +30,8 @@ public class DnDBotDriver {
         processor.setParty(buildDefaultParty());
         reader = new PropertiesFileReader();
         doTestThings(processor);
-        /*if (startDiscordAfterCommandLineListener(processor))
-            startDiscordListenerAdapter(processor);*/
+        if (startDiscordAfterCommandLineListener(processor))
+            startDiscordListenerAdapter(processor);
 
     }
 
@@ -88,7 +87,7 @@ public class DnDBotDriver {
 
     private void testDiceRandomness() {
         Die d20 = new Die(20);
-        HashMap<Integer, Integer> frequencies = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> frequencies = new HashMap<>();
         for (int i = 1; i <= 20; i++)
             frequencies.put(i, 0);
         int currRoll;
