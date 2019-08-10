@@ -15,6 +15,13 @@ public class PartyPersistanceDAO {
     private ObjectInputStream fromFileStream;
     private static final PropertiesFileReader reader = new PropertiesFileReader();
     private static final Logger LOGGER = LogManager.getLogger(PartyPersistanceDAO.class);
+    private static PartyPersistanceDAO instance;
+
+    public static PartyPersistanceDAO getInstance() {
+        if (instance == null)
+            instance = new PartyPersistanceDAO();
+        return instance;
+    }
 
     public boolean saveObjectToTTBotSaveFile(Object obj, String prepender) {
         try {

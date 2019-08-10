@@ -2,6 +2,7 @@ package com.thegingerbeardd.dndbot.adapter;
 
 import com.thegingerbeardd.dndbot.party.Party;
 import com.thegingerbeardd.dndbot.processor.impl.FifthEditionChatProcessor;
+import com.thegingerbeardd.dndbot.utils.PartyPersistanceDAO;
 import com.thegingerbeardd.dndbot.utils.PropertiesFileReader;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -12,7 +13,8 @@ public class DnDBotListenerAdapter extends ListenerAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DnDBotListenerAdapter.class);
     private FifthEditionChatProcessor messageProcessor;
-    private static final PropertiesFileReader = PropertiesFileReader.getInstance();
+    private static final PropertiesFileReader reader = PropertiesFileReader.getInstance();
+    private static final PartyPersistanceDAO dao = PartyPersistanceDAO.getInstance();
 
     public void setMessageProcessor(FifthEditionChatProcessor processor) {
         messageProcessor = processor;
