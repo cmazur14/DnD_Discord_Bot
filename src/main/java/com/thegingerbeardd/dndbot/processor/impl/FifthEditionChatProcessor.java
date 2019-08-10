@@ -32,4 +32,7 @@ public class FifthEditionChatProcessor implements ChatProcessor {
         return response;
     }
 
+    public Party getParty() {
+        return party;
+    }
 }

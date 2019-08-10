@@ -13,7 +13,6 @@ public class DnDBotListenerAdapter extends ListenerAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DnDBotListenerAdapter.class);
     private FifthEditionChatProcessor messageProcessor;
-    private static final PropertiesFileReader reader = PropertiesFileReader.getInstance();
     private static final PartyPersistanceDAO dao = PartyPersistanceDAO.getInstance();
 
     public void setMessageProcessor(FifthEditionChatProcessor processor) {
@@ -37,10 +36,21 @@ public class DnDBotListenerAdapter extends ListenerAdapter {
         else
             LOGGER.warn("Processing message from private channel: " + event.getMessage().getContentRaw());
         sendChat(event, messageProcessor.processInputMessage(event.getMessage().getContentRaw()));
+        if (!saveActivePartyFor(guildID, messageProcessor.getParty()))
+            sendChat(event, "I was unable to save your changes to the party/characters if you made any, just be aware!");
     }
 
     private Party getActivePartyFor(String guildID) {
+        Party party = (Party) dao.readObjectFromTTBotSaveFile(guildID);
+        if (party == null) {
+            LOGGER.debug("Creating new party to be the persistent one for this channel");
+            return new Party();
+        }
+        return party;
+    }
 
+    private Boolean saveActivePartyFor(String guildID, Party party) {
+        return dao.saveObjectToTTBotSaveFile(party, guildID);
     }
 
     private void sendChat(MessageReceivedEvent event, String msg) {
