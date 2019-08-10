@@ -32,7 +32,7 @@ public class DnDBotListenerAdapter extends ListenerAdapter {
 
     private void checkIfSaveWorkedAndInformOnFailure(String guildID, Party party, MessageReceivedEvent event) {
         if (!saveActivePartyFor(guildID, party)) {
-            LOGGER.debug("Failed to save party changes to disk");
+            LOGGER.error("Failed to save party changes to disk");
             sendChat(event, "I was unable to save your changes to the party/characters if you made any, just be aware!");
         }
     }
