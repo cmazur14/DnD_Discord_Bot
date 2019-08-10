@@ -21,23 +21,30 @@ public class DnDBotListenerAdapter extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getAuthor().isBot() || !event.getMessage().getContentRaw().startsWith("#ttbot")) {
-            LOGGER.debug("Ignoring message: " + event.getMessage().getContentRaw());
+        if (event.getAuthor().isBot() || !event.getMessage().getContentRaw().startsWith("#ttbot"))
             return;
-        }
         String guildID = event.getMessage().getGuild().getId();
-        LOGGER.debug("Processing message from guild id: " + guildID);
         messageProcessor.setParty(getActivePartyFor(guildID));
-        //TODO implement filesaving/loading based on event.getGuild().getName(); because a guild is the
-        //TODO serverside name for a channel, potentially adding on an .getGuild.getOwner_ID just in case any
-        //TODO servers are named the same way
-        if (event.getMember().getEffectiveName() != null)
-            LOGGER.debug("Processing message from: " + event.getMember().getEffectiveName() + event.getMessage().getContentRaw());
-        else
-            LOGGER.warn("Processing message from private channel: " + event.getMessage().getContentRaw());
+        logProcessing(event);
         sendChat(event, messageProcessor.processInputMessage(event.getMessage().getContentRaw()));
-        if (!saveActivePartyFor(guildID, messageProcessor.getParty()))
+        checkIfSaveWorkedAndInformOnFailure(guildID, messageProcessor.getParty(), event);
+    }
+
+    private void checkIfSaveWorkedAndInformOnFailure(String guildID, Party party, MessageReceivedEvent event) {
+        if (!saveActivePartyFor(guildID, party)) {
+            LOGGER.debug("Failed to save party changes to disk");
             sendChat(event, "I was unable to save your changes to the party/characters if you made any, just be aware!");
+        }
+    }
+
+    private void logProcessing(MessageReceivedEvent event) {
+        if (event.getMember().getEffectiveName() != null)
+            LOGGER.debug("Processing message: " + event.getMessage().getContentRaw() +
+                    "\nfrom server: " + event.getMessage().getGuild().getName() +
+                    "\nfrom user: " + event.getMember().getEffectiveName());
+        else
+            LOGGER.warn("Processing message: " + event.getMessage().getContentRaw() +
+                    "\nfrom user via PM: " + event.getMessage().getAuthor().getName());
     }
 
     private Party getActivePartyFor(String guildID) {
