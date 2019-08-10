@@ -12,6 +12,13 @@ public class PropertiesFileReader {
     private InputStream appPropertiesInputStream;
     private BufferedReader systemPropertiesInputStream;
     private Properties appProperties;
+    private PropertiesFileReader instance;
+
+    public PropertiesFileReader getInstance() {
+        if (instance == null)
+            instance = new PropertiesFileReader();
+        return instance;
+    }
 
     public Properties getApplicationProperties() throws IOException {
         if (appProperties != null)
