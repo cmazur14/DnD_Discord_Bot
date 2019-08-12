@@ -1,13 +1,12 @@
 package com.thegingerbeardd.dndbot.character;
 
-import com.sun.xml.internal.ws.util.StringUtils;
 import com.thegingerbeardd.dndbot.character.classes.ClassInitializer;
 import com.thegingerbeardd.dndbot.character.classes.ClassList;
 import com.thegingerbeardd.dndbot.character.sheet.CharacterAbilityScores;
 import com.thegingerbeardd.dndbot.character.sheet.CharacterClass;
 import com.thegingerbeardd.dndbot.character.sheet.CharacterSaveProficiencies;
-import com.thegingerbeardd.dndbot.character.sheet.CharacterSkillProficiencies;
 import com.thegingerbeardd.dndbot.character.utils.fifthedition.AbilityTypes;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.HashMap;
