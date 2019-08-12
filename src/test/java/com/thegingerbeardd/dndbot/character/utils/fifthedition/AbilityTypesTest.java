@@ -17,31 +17,35 @@ public class AbilityTypesTest {
 
     @Test
     public void canParseEnumTypeFromAnyValidInput() {
-        assertEquals(AbilityTypes.STR, AbilityTypes.valueOf("str".substring(0, 3).toUpperCase()));
-        assertEquals(AbilityTypes.STR, AbilityTypes.valueOf("STRENGTH".substring(0, 3).toUpperCase()));
-        assertEquals(AbilityTypes.STR, AbilityTypes.valueOf("Strength".substring(0, 3).toUpperCase()));
+        assertEquals(AbilityTypes.STR, AbilityTypes.getAbility("str"));
+        assertEquals(AbilityTypes.STR, AbilityTypes.getAbility("STRENGTH"));
+        assertEquals(AbilityTypes.STR, AbilityTypes.getAbility("Strength"));
 
-        assertEquals(AbilityTypes.DEX, AbilityTypes.valueOf("dex".substring(0, 3).toUpperCase()));
-        assertEquals(AbilityTypes.DEX, AbilityTypes.valueOf("DEXTERITY".substring(0, 3).toUpperCase()));
-        assertEquals(AbilityTypes.DEX, AbilityTypes.valueOf("Dexterity".substring(0, 3).toUpperCase()));
+        assertEquals(AbilityTypes.DEX, AbilityTypes.getAbility("dex"));
+        assertEquals(AbilityTypes.DEX, AbilityTypes.getAbility("DEXTERITY"));
+        assertEquals(AbilityTypes.DEX, AbilityTypes.getAbility("Dexterity"));
 
-        assertEquals(AbilityTypes.CON, AbilityTypes.valueOf("con".substring(0, 3).toUpperCase()));
-        assertEquals(AbilityTypes.CON, AbilityTypes.valueOf("CONSTITUTION".substring(0, 3).toUpperCase()));
-        assertEquals(AbilityTypes.CON, AbilityTypes.valueOf("Constitution".substring(0, 3).toUpperCase()));
+        assertEquals(AbilityTypes.CON, AbilityTypes.getAbility("con"));
+        assertEquals(AbilityTypes.CON, AbilityTypes.getAbility("CONSTITUTION"));
+        assertEquals(AbilityTypes.CON, AbilityTypes.getAbility("Constitution"));
 
-        assertEquals(AbilityTypes.INT, AbilityTypes.valueOf("int".substring(0, 3).toUpperCase()));
-        assertEquals(AbilityTypes.INT, AbilityTypes.valueOf("INTELLIGENCE".substring(0, 3).toUpperCase()));
-        assertEquals(AbilityTypes.INT, AbilityTypes.valueOf("Intelligence".substring(0, 3).toUpperCase()));
+        assertEquals(AbilityTypes.INT, AbilityTypes.getAbility("int"));
+        assertEquals(AbilityTypes.INT, AbilityTypes.getAbility("INTELLIGENCE"));
+        assertEquals(AbilityTypes.INT, AbilityTypes.getAbility("Intelligence"));
 
-        assertEquals(AbilityTypes.WIS, AbilityTypes.valueOf("wis".substring(0, 3).toUpperCase()));
-        assertEquals(AbilityTypes.WIS, AbilityTypes.valueOf("WISDOM".substring(0, 3).toUpperCase()));
-        assertEquals(AbilityTypes.WIS, AbilityTypes.valueOf("Wisdom".substring(0, 3).toUpperCase()));
+        assertEquals(AbilityTypes.WIS, AbilityTypes.getAbility("wis"));
+        assertEquals(AbilityTypes.WIS, AbilityTypes.getAbility("WISDOM"));
+        assertEquals(AbilityTypes.WIS, AbilityTypes.getAbility("Wisdom"));
 
-        assertEquals(AbilityTypes.CHA, AbilityTypes.valueOf("cha".substring(0, 3).toUpperCase()));
-        assertEquals(AbilityTypes.CHA, AbilityTypes.valueOf("Charisma".substring(0, 3).toUpperCase()));
-        assertEquals(AbilityTypes.CHA, AbilityTypes.valueOf("CHARISMA".substring(0, 3).toUpperCase()));
+        assertEquals(AbilityTypes.CHA, AbilityTypes.getAbility("cha"));
+        assertEquals(AbilityTypes.CHA, AbilityTypes.getAbility("Charisma"));
+        assertEquals(AbilityTypes.CHA, AbilityTypes.getAbility("CHARISMA"));
 
-        assertNotEquals(AbilityTypes.STR, AbilityTypes.valueOf());
+        assertNotEquals(AbilityTypes.STR, AbilityTypes.getAbility("constitution"));
+        assertNotEquals(AbilityTypes.DEX, AbilityTypes.getAbility("constitution"));
+        assertNotEquals(AbilityTypes.INT, AbilityTypes.getAbility("constitution"));
+        assertNotEquals(AbilityTypes.WIS, AbilityTypes.getAbility("constitution"));
+        assertNotEquals(AbilityTypes.CHA, AbilityTypes.getAbility("constitution"));
     }
 
 }
