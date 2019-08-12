@@ -1,4 +1,4 @@
-package com.thegingerbeardd.dndbot.utils;
+package com.thegingerbeardd.dndbot.character.utils.fifthedition;
 
 import com.thegingerbeardd.dndbot.character.utils.fifthedition.AbilityTypes;
 import org.junit.Test;
