@@ -5,7 +5,17 @@ import com.thegingerbeardd.dndbot.utils.TTBotConstants;
 
 public class FifthEditionCommandParser {
 
-    public static String parseAndGenerateResponse(String[] inputs, Party party) {
+    private static FifthEditionCommandParser instance;
+
+    private FifthEditionCommandParser() {};
+
+    public static FifthEditionCommandParser getInstance() {
+        if (instance == null)
+            instance = new FifthEditionCommandParser();
+        return instance;
+    }
+
+    public String parseAndGenerateResponse(String[] inputs, Party party) {
         String response = null;
         switch (inputs[1].toLowerCase()) {
             case "whois":
@@ -28,7 +38,7 @@ public class FifthEditionCommandParser {
         return response;
     }
 
-    public static String parseRollCommandAndGenerateResponse(String [] inputs, Party party) {
+    public String parseRollCommandAndGenerateResponse(String [] inputs, Party party) {
         return null;
     }
 }

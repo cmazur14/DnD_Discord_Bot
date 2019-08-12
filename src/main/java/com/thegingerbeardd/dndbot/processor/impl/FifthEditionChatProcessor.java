@@ -25,7 +25,9 @@ public class FifthEditionChatProcessor implements ChatProcessor {
         LOGGER.debug("Received message with tokens: " + Arrays.toString(inputs));
         String response;
         try {
-            response = FifthEditionCommandParser.parseAndGenerateResponse(inputs, party);
+            response = FifthEditionCommandParser
+                    .getInstance()
+                    .parseAndGenerateResponse(inputs, party);
         } catch (ArrayIndexOutOfBoundsException e) {
             response = "That command was not recognized!";
         }
