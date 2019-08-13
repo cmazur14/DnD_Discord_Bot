@@ -14,18 +14,18 @@ or party command. All commands and arguments are case insensitive, with the exce
 #### Commands Currently Supported:
 * Who/whois -> Will make the bot list all of the members of the currently set party
     * syntax: '#ttbot who' or ' #ttbot whois'
+* Add -> Will create a new character using the provided name, setting their current level to 0. 
+   * syntax: '#ttbot add CHARACTERNAME'
 * Character-Specific Saving Throws -> Will roll a 5th Edition saving throw of the appropriate type, getting the 
 appropriate modifier from the character's ability scores, and applying the character's proficiency
 bonus if the character's classes are proficient in that save. The type of save can be abbreviated or fully spelled out
-    * syntax: '#ttbot TYPE save CHARACTER'
+    * syntax: '#ttbot ABILITYTYPE save CHARACTERNAME'
     * Examples:
         * '#ttbot dex save bob' -> will roll a DEX saving throw, using Bob's DEX save modifier
         * '#ttbot dexterity save bob' -> same as above
         * '#ttbot INT save Phil' -> will roll an INT saving throw, using Phil's INT save modifier
 
 #### Commands on the roadmap:
-* Create character -> Will take a character name and the "create" keyword, and add that character as a Level 0 character
-to the current party, with no proficiencies and all ability scores set to 10
 * Remove character -> Will take a character name and remove that character and it's data from the active party
 * Add Level -> Will take a character name and a 5th edition PHB character class, and increase the 
 character's level in that class
